@@ -4,9 +4,9 @@ import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
 
 export default function DetaliedCard({
-  userName = 'Vlad',
+  authorId,
+  userNameAuthor,
   avatarUrl,
-  id,
   imgUrl,
   likes,
   isLikedByYou,
@@ -17,22 +17,13 @@ export default function DetaliedCard({
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
       const commentsCopy = [...comments];
-      const commentsForRender = commentsCopy.splice(comments.lenght - 2, 2);
+      const commentsForRender = commentsCopy.slice(-2);
       return (
         <>
-          <span
-            className='cnDetailedCardCommentTitle'
-            onClick={() => setIsCommentShow(!isCommentShow)}>
-            {isCommentShow === false
-              ? `Показать ещё ${
-                  comments.length - commentsForRender.length
-                } комментариев`
-              : 'скрыть'}
-          </span>
           {commentsForRender.map((comment) => (
             <Comment
               key={comment.id}
-              userName={comment.userName}
+              userName={comment.nickname}
               text={comment.text}
             />
           ))}
@@ -42,7 +33,7 @@ export default function DetaliedCard({
     return comments.map((comment) => (
       <Comment
         key={comment.id}
-        userName={comment.userName}
+        userName={comment.nickname}
         text={comment.text}
       />
     ));
@@ -52,9 +43,9 @@ export default function DetaliedCard({
     <div className='cnDetailedCardRoot'>
       <div className='cnDetailedCardHeader'>
         <UserBadge
-          userName={userName}
+          nickName={userNameAuthor}
           avatarUrl={avatarUrl}
-          id={id}
+          id={authorId}
         />
       </div>
       <div>
@@ -69,7 +60,18 @@ export default function DetaliedCard({
         <i className='fa-solid fa-comment' />
       </div>
       <div className='cnDetailedCardLikes'>{`Оценили ${likes} человек`}</div>
-      <div className='cnDetailedCardComments'>{renderComments()}</div>
+      <div className='cnDetailedCardComments'>
+        <span
+          className='cnDetailedCardCommentTitle'
+          onClick={() => setIsCommentShow(!isCommentShow)}>
+          {comments.length > 2
+            ? isCommentShow === false
+              ? `Показать ещё комментарии`
+              : 'скрыть'
+            : null}
+        </span>
+        {renderComments()}
+      </div>
       <textarea className='cnDetailedCardTextarea' />
     </div>
   );

@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
-export default function UserBage({ nickName, avatarUrl, id }) {
+export default function UserBage({ nickName = 'asd', avatarUrl, id }) {
   const navigate = useNavigate();
 
   const onUserBadgeClick = () => {
