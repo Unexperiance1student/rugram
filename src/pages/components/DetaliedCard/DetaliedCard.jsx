@@ -72,7 +72,10 @@ export default function DetaliedCard({
         </span>
         {renderComments()}
       </div>
-      <textarea className='cnDetailedCardTextarea' />
+      <textarea
+        placeholder='Оставьте комментарий'
+        className='cnDetailedCardTextarea'
+      />
     </div>
   );
 }

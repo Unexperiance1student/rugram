@@ -9,6 +9,7 @@ export const postsApi = createApi({
   endpoints: (build) => ({
     getPosts: build.query({
       query: (limit = '') => `posts?${limit && `_limit=${limit}`}`,
+
       providesTags: (result) =>
         result
           ? [
