@@ -2,23 +2,21 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { Bars } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { useGetPostsQuery } from '../../store/api/postsApi';
-import { fetchPostsTotalCount } from '../../store/slice/postsSlice';
+import { v4 } from 'uuid';
+import { fetchPosts, fetchPostsTotalCount } from '../../store/slice/postsSlice';
 import DetaliedCard from '../components/DetaliedCard/DetaliedCard';
 import Layout from '../components/Layout/Layout';
 import './style.scss';
 
 export default function MainPage() {
   const dispatch = useDispatch();
-  const [limit, setLimit] = useState(4);
-  const { totalCount } = useSelector((state) => state.posts);
+  const [page, setPage] = useState(1);
+  const { totalCount, posts, error } = useSelector((state) => state.posts);
 
-  const {
-    data: posts = {},
-    isLoading,
-    isError,
-    refetch,
-  } = useGetPostsQuery(limit);
+  useEffect(() => {
+    dispatch(fetchPostsTotalCount());
+    dispatch(fetchPosts());
+  }, []);
 
   const loader = (
     <div className='cnMainPageLoader'>
@@ -30,47 +28,40 @@ export default function MainPage() {
     </div>
   );
 
-  const nextHandler = () => {
-    setLimit(limit + 4);
+  const List = () => {
+    return posts.map((post) => (
+      <DetaliedCard
+        key={v4()}
+        authorId={post.author.id}
+        likes={post.likes.length}
+        isLikedByYou={true}
+        imgUrl={post.imgUrl}
+        comments={post.comments}
+        avatarUrl={post.author.avatarUrl}
+        userNameAuthor={post.author.nickname}
+      />
+    ));
   };
 
-  useEffect(() => {
-    dispatch(fetchPostsTotalCount());
-  }, []);
+  const nextHandler = () => {
+    setPage((prev) => prev + 1);
+    dispatch(fetchPosts(page));
+  };
 
-  useEffect(() => {
-    refetch({ limit }).unwrap();
-  }, [limit]);
-
-  if (isError) return <h1>errors</h1>;
+  if (error) return <h1>errors</h1>;
   return (
     <Layout
       nickName='Vlad'
       id={1}>
       <div className='cnMainPageRoot'>
-        {isLoading ? (
-          loader
-        ) : (
-          <InfiniteScroll
-            dataLength={posts.length}
-            next={() => nextHandler()}
-            hasMore={posts.length < totalCount}
-            loader={loader}
-            endMessage={<p>Thats all</p>}>
-            {posts.map((post) => (
-              <DetaliedCard
-                key={post.id}
-                authorId={post.author.id}
-                likes={post.likes.length}
-                isLikedByYou={true}
-                imgUrl={post.imgUrl}
-                comments={post.comments}
-                avatarUrl={post.author.avatarUrl}
-                userNameAuthor={post.author.nickname}
-              />
-            ))}
-          </InfiniteScroll>
-        )}
+        <InfiniteScroll
+          dataLength={posts.length}
+          next={nextHandler}
+          hasMore={posts.length < totalCount}
+          loader={loader}
+          endMessage={<p>Thats all</p>}>
+          <List />
+        </InfiniteScroll>
       </div>
     </Layout>
   );

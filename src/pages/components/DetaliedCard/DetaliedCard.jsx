@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './style.scss';
 import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
+import { v4 } from 'uuid';
 
 export default function DetaliedCard({
   authorId,
@@ -22,7 +23,7 @@ export default function DetaliedCard({
         <>
           {commentsForRender.map((comment) => (
             <Comment
-              key={comment.id}
+              key={v4()}
               userName={comment.nickname}
               text={comment.text}
             />
@@ -32,7 +33,7 @@ export default function DetaliedCard({
     }
     return comments.map((comment) => (
       <Comment
-        key={comment.id}
+        key={v4()}
         userName={comment.nickname}
         text={comment.text}
       />

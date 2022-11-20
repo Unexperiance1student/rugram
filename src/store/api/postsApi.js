@@ -8,7 +8,7 @@ export const postsApi = createApi({
   }),
   endpoints: (build) => ({
     getPosts: build.query({
-      query: (limit = '') => `posts?${limit && `_limit=${limit}`}`,
+      query: (page = '') => `posts?${page && `_page=${page}`}&_limit=5`,
 
       providesTags: (result) =>
         result

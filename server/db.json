@@ -36,15 +36,15 @@
             "text": "awesome!"
           },
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "asdassss\n"
           },
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "asd\n"
           },
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "asd\n"
           }
         ],
@@ -66,7 +66,7 @@
             "text": "awesome!"
           },
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "way\n"
           }
         ],
@@ -150,7 +150,7 @@
         ],
         "comments": [
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "ssss\n"
           }
         ],
@@ -189,7 +189,7 @@
             "text": "awesome!"
           },
           {
-            "nickname": "vosdux",
+            "nickname": "ded",
             "text": "asdassss\n"
           }
         ],
@@ -284,10 +284,10 @@
         "id": 1,
         "firstName": "Artemsss",
         "lastName": "Karpukhov",
-        "nickname": "vosduxxx",
+        "nickname": "dedxx",
         "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png",
         "description": "about me text",
-        "url": "https://t.me/vosduxFrontend",
+        "url": "https://t.me/dedFrontend",
         "subscribers": [
           2,
           3,
@@ -306,7 +306,7 @@
         "nickname": "IUvan222",
         "avatarUrl": "https://aftershock.news/sites/default/files/u27392/teasers/putin-2.jpg",
         "description": "about me text",
-        "url": "https://t.me/vosduxFrontend",
+        "url": "https://t.me/dedFrontend",
         "subscribers": [
           1,
           3
@@ -325,7 +325,7 @@
         "nickname": "Seriy2",
         "avatarUrl": "https://rest-zone.ru/upload/photos/2021/05/8Uu8sYR5dIQwPOSdPbvK_12_ffa126fc14b13cbf301d86cff093984a_avatar_full.jpg",
         "description": "about me text",
-        "url": "https://t.me/vosduxFrontend",
+        "url": "https://t.me/dedFrontend",
         "subscribers": [
           2,
           1,
@@ -346,7 +346,7 @@
         "nickname": "Dmytro3",
         "avatarUrl": "https://ru-static.z-dn.net/files/d73/12f74c43f454f38c2e0c6dbe581f73ef.jpg",
         "description": "about me text",
-        "url": "https://t.me/vosduxFrontend",
+        "url": "https://t.me/dedFrontend",
         "subscribers": [
           2,
           3,
@@ -367,7 +367,7 @@
         "nickname": "Pli34",
         "avatarUrl": "https://ru-static.z-dn.net/files/d22/1ea210af0e7432068e63ed30f284c35a.jpg",
         "description": "about me text",
-        "url": "https://t.me/vosduxFrontend",
+        "url": "https://t.me/dedFrontend",
         "subscribers": [
           2,
           3,
@@ -411,7 +411,7 @@
             ],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -437,7 +437,7 @@
             ],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -463,7 +463,7 @@
             ],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -476,7 +476,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -489,7 +489,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -515,7 +515,7 @@
             ],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -544,7 +544,7 @@
             ],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -557,7 +557,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -570,7 +570,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -583,7 +583,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -596,7 +596,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           },
@@ -609,7 +609,7 @@
             "comments": [],
             "author": {
               "id": 1,
-              "nickname": "vosdux",
+              "nickname": "ded",
               "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
             }
           }
