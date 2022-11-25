@@ -46,15 +46,36 @@
 }
 
 .cnDetailedCardTextarea {
+  box-sizing: border-box;
   border: none;
   background-color: #fff;
   padding: 10px;
   outline: none;
   resize: none;
+  width: 100%;
 }
 
 .cnDetailedCardCommentTitle {
   font-size: 14px;
   color: #dbdbdb;
   cursor: pointer;
+}
+
+.cnDetailedCardTextareaWrapper {
+  position: relative;
+}
+
+.cnDetailedCardButton {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  padding: 5px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background: #2195f39a;
+  }
 }

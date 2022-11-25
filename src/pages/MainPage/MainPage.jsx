@@ -2,7 +2,12 @@ import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 } from 'uuid';
-import { fetchPosts, fetchPostsTotalCount } from '../../store/slice/postsSlice';
+import {
+  fetchPosts,
+  fetchPostsTotalCount,
+  likePost,
+  sendComment,
+} from '../../store/slice/postsSlice';
 import DetaliedCard from '../components/DetaliedCard/DetaliedCard';
 import Layout from '../components/Layout/Layout';
 import Loader from '../../UI/Loader/Loader';
@@ -19,13 +24,21 @@ export default function MainPage() {
     dispatch(fetchPosts());
   }, []);
 
+  const onClickLike = (authorizedUser, id) => {
+    dispatch(likePost({ userId: authorizedUser, postId: id }));
+  };
+
+  const onClickSend = (authorizedUser, comment, id) => {
+    dispatch(sendComment({ user: authorizedUser, text: comment, postId: id }));
+  };
+
   const nextHandler = () => {
     setPage((prev) => prev + 1);
     dispatch(fetchPosts(page));
   };
 
-  const List = () => {
-    return posts.map(({ author, likes, imgUrl, comments, id }) => (
+  const list = posts.map(({ author, likes, imgUrl, comments, id }) => (
+    <>
       <DetaliedCard
         key={v4()}
         id={id}
@@ -36,9 +49,12 @@ export default function MainPage() {
         comments={comments}
         avatarUrl={author.avatarUrl}
         userNameAuthor={author.nickname}
+        authorizedUser={authorizedUser[0]}
+        onClickLike={onClickLike}
+        onClickSend={onClickSend}
       />
-    ));
-  };
+    </>
+  ));
 
   if (postError) return <h1>errors</h1>;
   return (
@@ -50,7 +66,7 @@ export default function MainPage() {
           hasMore={posts.length < totalCount}
           loader={<Loader className={'cnMainPageLoader'} />}
           endMessage={<p>Thats all</p>}>
-          <List />
+          {list}
         </InfiniteScroll>
       </div>
     </Layout>

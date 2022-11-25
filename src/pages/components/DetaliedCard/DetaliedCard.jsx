@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import './style.scss';
 import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
 import { v4 } from 'uuid';
-import { useDispatch, useSelector } from 'react-redux';
-import { likePost } from '../../../store/slice/postsSlice';
 
-export default function DetaliedCard({
+function DetaliedCard({
   id,
   authorId,
   userNameAuthor,
@@ -15,10 +13,13 @@ export default function DetaliedCard({
   likes,
   isLikedByYou,
   comments,
+  authorizedUser,
+  onClickLike,
+  onClickSend,
 }) {
-  const { authorizedUser } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [isCommentShow, setIsCommentShow] = useState(false);
+  // const [comment, setComment] = useState('');
+  let textRef = useRef('');
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
       const commentsCopy = [...comments];
@@ -40,6 +41,10 @@ export default function DetaliedCard({
     ));
   };
 
+  const textChange = () => {
+    onClickSend(authorizedUser.nickname, textRef.current.value, id);
+  };
+
   return (
     <div className='cnDetailedCardRoot'>
       <div className='cnDetailedCardHeader'>
@@ -58,9 +63,7 @@ export default function DetaliedCard({
       </div>
       <div className='cnDetailedCardButtons'>
         <i
-          onClick={() =>
-            dispatch(likePost({ userId: authorizedUser[0].id, postId: id }))
-          }
+          onClick={() => onClickLike(authorizedUser.id, id)}
           className={`${isLikedByYou ? 'fa-solid' : 'fa-regular'} fa-heart`}
         />
         <i className='fa-solid fa-comment' />
@@ -78,10 +81,20 @@ export default function DetaliedCard({
         </span>
         {renderComments()}
       </div>
-      <textarea
-        placeholder='Оставьте комментарий'
-        className='cnDetailedCardTextarea'
-      />
+      <div className='cnDetailedCardTextareaWrapper'>
+        <textarea
+          ref={textRef}
+          placeholder='Оставьте комментарий'
+          className='cnDetailedCardTextarea'
+        />
+        <button
+          onClick={textChange}
+          className='cnDetailedCardButton'>
+          Отправить
+        </button>
+      </div>
     </div>
   );
 }
+
+export default DetaliedCard;

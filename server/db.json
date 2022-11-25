@@ -4,7 +4,8 @@
       "id": 3,
       "imgUrl": "https://img.desktopwallpapers.ru/auto/pics/wide/1920x1200/f8e101812b260e55d1d9b7aa64af8171.jpg",
       "likes": [
-        4
+        4,
+        1
       ],
       "comments": [
         {
@@ -14,6 +15,34 @@
         {
           "nickname": "ded",
           "text": "way\n"
+        },
+        {
+          "nickname": "ID5",
+          "text": "good!"
+        },
+        {
+          "nickname": "dedInside",
+          "text": "wayke up"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "asd"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "a"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "ds"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "dssdsdsdsd"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "sdsdsdsd"
         }
       ],
       "author": {
@@ -25,9 +54,7 @@
     {
       "id": 4,
       "imgUrl": "https://s1.1zoom.ru/big0/93/340564-FAKIR.jpg",
-      "likes": [
-        1
-      ],
+      "likes": [],
       "comments": [],
       "author": {
         "id": 4,
@@ -78,9 +105,7 @@
     {
       "id": 8,
       "imgUrl": "https://img3.goodfon.ru/original/7297x4870/2/5a/pasture-the-bavarian-alps.jpg",
-      "likes": [
-        1
-      ],
+      "likes": [],
       "comments": [],
       "author": {
         "id": 3,
@@ -113,7 +138,8 @@
         2,
         3,
         4,
-        5
+        5,
+        1
       ],
       "comments": [],
       "author": {

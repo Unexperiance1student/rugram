@@ -27,9 +27,10 @@ export const fetchPosts = createAsyncThunk(
     return [...store.posts.posts, ...data];
   }
 );
+
 export const likePost = createAsyncThunk(
   'posts/likePost',
-  async function ({ userId, postId }, { rejectWithValue, getState, dispatch }) {
+  async function ({ userId, postId }, { rejectWithValue, getState }) {
     const post = getState().posts.posts.find((post) => post.id === postId);
     if (post) {
       const newPost = { ...post, likes: [...post.likes] };
@@ -59,6 +60,38 @@ export const likePost = createAsyncThunk(
   }
 );
 
+export const sendComment = createAsyncThunk(
+  'posts/sendComment',
+  async function ({ user, text, postId }, { rejectWithValue, getState }) {
+    const post = getState().posts.posts.find((post) => post.id === postId);
+    if (post) {
+      const newPost = { ...post, comments: [...post.comments] };
+      const comment = {
+        nickname: user,
+        text: text,
+      };
+      const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          comments: newPost.comments.concat(comment),
+        }),
+      });
+
+      if (!response.ok) {
+        return rejectWithValue('Server Error!');
+      }
+      const data = await response.json();
+
+      return data;
+    }
+
+    return rejectWithValue('No post!');
+  }
+);
+
 const initialState = {
   posts: [],
   totalCount: 0,
@@ -69,24 +102,7 @@ const initialState = {
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {
-    likePosts: (state, action) => {
-      const likePost = state.posts.find(
-        (post) => post.id === action.payload.postId
-      );
-      console.log(likePost);
-      console.log(action.payload.postId);
-      console.log(action.payload.userId);
-
-      if (likePost) {
-        likePost.likes.includes(action.payload.userId)
-          ? (likePost.likes = likePost.likes.filter(
-              (like) => like === action.payload.userId
-            ))
-          : likePost.likes.push(action.payload.userId);
-      }
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchPostsTotalCount.pending, (state) => {
@@ -108,22 +124,27 @@ const postsSlice = createSlice({
       })
 
       .addCase(likePost.fulfilled, (state, action) => {
-        const likePost = state.posts.find(
+        const idPost = state.posts.find(
+          (post) => post.id === action.payload.id
+        );
+        if (idPost) {
+          console.log(idPost);
+          console.log(action.payload);
+          idPost.likes = action.payload.likes;
+        }
+      })
+      .addCase(sendComment.fulfilled, (state, action) => {
+        const idPost = state.posts.find(
           (post) => post.id === action.payload.id
         );
 
-        // if (likePost) {
-        //   likePost.likes.includes(action.payload.userId)
-        //     ? likePost.likes.filter((like) => like === action.payload.userId)
-        //     : likePost.likes.push(action.payload.userId);
-        // }
-        // likePosts({
-        //   userId: action.payload.userId,
-        //   postId: action.payload.postId,
-        // });
-        likePost.likes = action.payload.likes;
+        if (idPost) {
+          // console.log(idPost);
+          // console.log(action.payload);
+          // console.log(idPost)
+          idPost.comments = action.payload.comments;
+        }
       })
-
       .addMatcher(ispostError, (state, action) => {
         state.postError = Number(action.payload);
         state.isPostsLoading = false;
@@ -136,4 +157,4 @@ function ispostError(action) {
 }
 
 export default postsSlice.reducer;
-export const { likePosts } = postsSlice.actions;
+export const {} = postsSlice.actions;
