@@ -2,14 +2,10 @@ import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import './style.scss';
 
-export default function Layout({ nickName, avatarUrl, id, children }) {
+export default function Layout({ children }) {
   return (
     <div className='cnLayoutRoot'>
-      <Navbar
-        nickName={nickName}
-        avatarUrl={avatarUrl}
-        id={id}
-      />
+      <Navbar />
       <div className='cnLayoutBody'>{children}</div>
     </div>
   );

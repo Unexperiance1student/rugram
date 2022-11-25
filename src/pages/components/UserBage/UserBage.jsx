@@ -1,28 +1,30 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import './style.scss';
 
-export default function UserBage({ nickName = 'asd', avatarUrl, id }) {
+export default function UserBage() {
   const navigate = useNavigate();
+  const { authorizedUser } = useSelector((state) => state.user);
 
   const onUserBadgeClick = () => {
-    navigate(`/${id}`);
+    navigate(`/${authorizedUser[0].id}`);
   };
 
   return (
     <div
       className='cnUserBadgeRoot'
       onClick={onUserBadgeClick}>
-      {avatarUrl ? (
+      {authorizedUser[0].avatarUrl ? (
         <img
-          src={avatarUrl}
+          src={authorizedUser[0].avatarUrl}
           alt='logo'
           className='cnUserBadgeAvatar'
         />
       ) : (
         <div className='cnUserBadgeLoaderImg'></div>
       )}
-      <span className='cnUserBadgeName'>{nickName}</span>
+      <span className='cnUserBadgeName'>{authorizedUser[0].nickname}</span>
     </div>
   );
 }

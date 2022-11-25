@@ -14,7 +14,7 @@ export const fetchPostsTotalCount = createAsyncThunk(
 );
 export const fetchPosts = createAsyncThunk(
   'posts/fetchPosts',
-  async function (page = '', { rejectWithValue, getState }) {
+  async function (page = '1', { rejectWithValue, getState }) {
     const response = await fetch(
       `http://localhost:3001/posts?${page && `_page=${page}`}&_limit=4`
     );
@@ -27,46 +27,113 @@ export const fetchPosts = createAsyncThunk(
     return [...store.posts.posts, ...data];
   }
 );
+export const likePost = createAsyncThunk(
+  'posts/likePost',
+  async function ({ userId, postId }, { rejectWithValue, getState, dispatch }) {
+    const post = getState().posts.posts.find((post) => post.id === postId);
+    if (post) {
+      const newPost = { ...post, likes: [...post.likes] };
+      const response = await fetch(`http://localhost:3001/posts/${postId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          likes: post.likes.includes(userId)
+            ? (newPost.likes = newPost.likes.filter(
+                (like) => Number(like) !== Number(userId)
+              ))
+            : newPost.likes.concat(userId),
+        }),
+      });
+
+      if (!response.ok) {
+        return rejectWithValue('Server Error!');
+      }
+      const data = await response.json();
+
+      return data;
+    }
+
+    return rejectWithValue('No post!');
+  }
+);
 
 const initialState = {
   posts: [],
   totalCount: 0,
-  loading: false,
-  error: null,
+  isPostsLoading: false,
+  postError: null,
 };
 
 const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    likePosts: (state, action) => {
+      const likePost = state.posts.find(
+        (post) => post.id === action.payload.postId
+      );
+      console.log(likePost);
+      console.log(action.payload.postId);
+      console.log(action.payload.userId);
+
+      if (likePost) {
+        likePost.likes.includes(action.payload.userId)
+          ? (likePost.likes = likePost.likes.filter(
+              (like) => like === action.payload.userId
+            ))
+          : likePost.likes.push(action.payload.userId);
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPostsTotalCount.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.isPostsLoading = true;
+        state.postError = null;
       })
       .addCase(fetchPostsTotalCount.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isPostsLoading = false;
         state.totalCount = action.payload;
       })
+
       .addCase(fetchPosts.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.isPostsLoading = true;
+        state.postError = null;
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        state.loading = false;
+        state.isPostsLoading = false;
         state.posts = action.payload;
       })
-      .addMatcher(isError, (state, action) => {
-        state.error = Number(action.payload);
-        state.loading = false;
+
+      .addCase(likePost.fulfilled, (state, action) => {
+        const likePost = state.posts.find(
+          (post) => post.id === action.payload.id
+        );
+
+        // if (likePost) {
+        //   likePost.likes.includes(action.payload.userId)
+        //     ? likePost.likes.filter((like) => like === action.payload.userId)
+        //     : likePost.likes.push(action.payload.userId);
+        // }
+        // likePosts({
+        //   userId: action.payload.userId,
+        //   postId: action.payload.postId,
+        // });
+        likePost.likes = action.payload.likes;
+      })
+
+      .addMatcher(ispostError, (state, action) => {
+        state.postError = Number(action.payload);
+        state.isPostsLoading = false;
       });
   },
 });
 
-function isError(action) {
+function ispostError(action) {
   return action.type.endsWith('rejected');
 }
 
 export default postsSlice.reducer;
-export const {} = postsSlice.actions;
+export const { likePosts } = postsSlice.actions;

@@ -2,16 +2,12 @@ import React from 'react';
 import UserBage from '../UserBage/UserBage';
 import './style.scss';
 
-export default function Navbar({ nickName, avatarUrl, id }) {
+export default function Navbar() {
   return (
     <div className='cnNavbarRoot'>
       <div className='cnNavbarWrapper'>
         <span>Rugram</span>
-        <UserBage
-          nickName={nickName}
-          avatarUrl={avatarUrl}
-          id={id}
-        />
+        <UserBage />
       </div>
     </div>
   );
