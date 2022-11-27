@@ -4,8 +4,7 @@
       "id": 3,
       "imgUrl": "https://img.desktopwallpapers.ru/auto/pics/wide/1920x1200/f8e101812b260e55d1d9b7aa64af8171.jpg",
       "likes": [
-        4,
-        1
+        4
       ],
       "comments": [
         {
@@ -34,15 +33,7 @@
         },
         {
           "nickname": "dedxx",
-          "text": "ds"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "dssdsdsdsd"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "sdsdsdsd"
+          "text": "ads"
         }
       ],
       "author": {
@@ -54,8 +45,15 @@
     {
       "id": 4,
       "imgUrl": "https://s1.1zoom.ru/big0/93/340564-FAKIR.jpg",
-      "likes": [],
-      "comments": [],
+      "likes": [
+        1
+      ],
+      "comments": [
+        {
+          "nickname": "dedxx",
+          "text": "asd"
+        }
+      ],
       "author": {
         "id": 4,
         "nickname": "Dmytro3",

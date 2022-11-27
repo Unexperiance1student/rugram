@@ -18,8 +18,8 @@ function DetaliedCard({
   onClickSend,
 }) {
   const [isCommentShow, setIsCommentShow] = useState(false);
-  // const [comment, setComment] = useState('');
   let textRef = useRef('');
+
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
       const commentsCopy = [...comments];
@@ -42,7 +42,10 @@ function DetaliedCard({
   };
 
   const textChange = () => {
-    onClickSend(authorizedUser.nickname, textRef.current.value, id);
+    if (textRef.current.value) {
+      onClickSend(authorizedUser.nickname, textRef.current.value, id);
+      textRef.current.focus();
+    }
   };
 
   return (

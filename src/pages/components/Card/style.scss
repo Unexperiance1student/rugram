@@ -1,0 +1,16 @@
+.cnCardRoot {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.cnCardImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}

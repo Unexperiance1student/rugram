@@ -30,7 +30,7 @@ export const fetchPosts = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   'posts/likePost',
-  async function ({ userId, postId }, { rejectWithValue, getState }) {
+  async function ({ userId, postId }, { rejectWithValue, getState, dispatch }) {
     const post = getState().posts.posts.find((post) => post.id === postId);
     if (post) {
       const newPost = { ...post, likes: [...post.likes] };
@@ -128,8 +128,6 @@ const postsSlice = createSlice({
           (post) => post.id === action.payload.id
         );
         if (idPost) {
-          console.log(idPost);
-          console.log(action.payload);
           idPost.likes = action.payload.likes;
         }
       })
@@ -139,9 +137,6 @@ const postsSlice = createSlice({
         );
 
         if (idPost) {
-          // console.log(idPost);
-          // console.log(action.payload);
-          // console.log(idPost)
           idPost.comments = action.payload.comments;
         }
       })

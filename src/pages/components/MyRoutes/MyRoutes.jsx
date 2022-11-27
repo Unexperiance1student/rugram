@@ -6,9 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchAuthorizedUser } from '../../../store/slice/userSlice';
 import UserPage from '../../UserPage/UserPage';
 import Loader from '../../../UI/Loader/Loader';
+import { v4 } from 'uuid';
 
 const authorizedRoutes = [
-  { key: 1, path: '/', element: <MainPage />, exact: true },
+  { key: v4(), path: '/', element: <MainPage />, exact: true },
   { key: 2, path: '/:id', element: <UserPage />, exact: true },
 ];
 const NonAuthorizedRoutes = (

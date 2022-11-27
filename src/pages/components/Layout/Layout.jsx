@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../Navbar/Navbar';
 import './style.scss';
 
-export default function Layout({ children }) {
+function Layout({ children }) {
   return (
     <div className='cnLayoutRoot'>
       <Navbar />
@@ -10,3 +10,5 @@ export default function Layout({ children }) {
     </div>
   );
 }
+
+export default Layout;
