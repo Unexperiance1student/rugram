@@ -1,14 +1,36 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { memoUser } from '../../store/selector';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { memoUser, memoUserPosts } from '../../store/selector';
+import {
+  fetchUserPosts,
+  likeUserPost,
+} from '../../store/slice/postsByUserSlice';
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
 import UserBio from '../components/UserBio/UserBio';
+import { v4 } from 'uuid';
 import './style.scss';
+import { useParams } from 'react-router-dom';
 
 function UserPage() {
-  const { authorizedUser, user } = useSelector(memoUser);
-  console.log(user);
+  const { authorizedUser } = useSelector(memoUser);
+  const { posts, isPostsLoading } = useSelector(memoUserPosts);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const onClickLike = (PostId) => {
+    dispatch(
+      likeUserPost({
+        userId: authorizedUser[0].id,
+        postId: PostId,
+        postAuthorId: Number(id),
+      })
+    );
+  };
+
+  useEffect(() => {
+    dispatch(fetchUserPosts(id));
+  }, []);
+
   return (
     <Layout>
       <div className='cnUserPageRoot'>
@@ -23,10 +45,17 @@ function UserPage() {
           url={authorizedUser[0].url}
         />
         <div className='cnUserPageRootContant'>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
+          {posts.map(({ comments, likes, imgUrl, id }) => (
+            <Card
+              key={v4()}
+              id={id}
+              imgUrl={imgUrl}
+              likes={likes.length}
+              comments={comments.length}
+              isLikedByYou={likes.includes(authorizedUser[0].id)}
+              onClickLike={onClickLike}
+            />
+          ))}
         </div>
       </div>
     </Layout>

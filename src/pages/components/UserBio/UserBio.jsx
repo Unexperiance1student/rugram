@@ -3,7 +3,7 @@ import { v4 } from 'uuid';
 import UserCounter from '../UserCounter/UserCounter';
 import './style.scss';
 
-export default function UserBio({
+function UserBio({
   avatarUrl,
   nickname,
   subscribed,
@@ -53,3 +53,5 @@ export default function UserBio({
     </div>
   );
 }
+
+export default React.memo(UserBio);
