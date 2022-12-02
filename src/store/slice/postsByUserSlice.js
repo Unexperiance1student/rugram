@@ -32,12 +32,14 @@ export const likeUserPost = createAsyncThunk(
     const newPosts = [...posts];
     const postIndex = posts.findIndex((post) => post.id === postId);
     const postForEdit = { ...newPosts[postIndex] };
-    console.log(postForEdit);
+
     if (postForEdit.likes.includes(userId)) {
       postForEdit.likes = postForEdit.likes.filter((like) => like !== userId);
     } else {
       postForEdit.likes = postForEdit.likes.concat(userId);
     }
+
+    newPosts[postIndex] = { ...postForEdit };
 
     if (postForEdit) {
       const response = await fetch(
@@ -80,14 +82,14 @@ const postsByUserSlice = createSlice({
         state.posts = action.payload;
       })
       .addCase(likeUserPost.fulfilled, (state, action) => {
-        // const idPost = state.posts.find(
-        //   (post) => post.id === action.payload.posts[post.id]
+        // const idPost = state.posts.findIndex(
+        //   (post) => post.id === action.payload.posts
         // );
+        // console.log(idPost);
         // if (idPost) {
         //   idPost.likes = action.payload.likes;
         // }
         state.posts = action.payload.posts;
-        console.log(action.payload.posts);
 
         // console.log(idPost);
         // console.log(action.payload.posts[0]);

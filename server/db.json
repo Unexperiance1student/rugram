@@ -4,8 +4,7 @@
       "id": 3,
       "imgUrl": "https://img.desktopwallpapers.ru/auto/pics/wide/1920x1200/f8e101812b260e55d1d9b7aa64af8171.jpg",
       "likes": [
-        4,
-        1
+        4
       ],
       "comments": [
         {
@@ -365,7 +364,6 @@
           "id": 1,
           "imgUrl": "https://mobimg.b-cdn.net/v3/fetch/fc/fc97db329bd4482025eaa1e3961dc80e.jpeg?w=1470&r=0.5625",
           "likes": [
-            1,
             2,
             3,
             4,
@@ -567,7 +565,8 @@
           "id": 11,
           "imgUrl": "https://mnogo-krolikov.ru/wp-content/uploads/2019/06/https-avatars-mds-yandex-net-get-pdb-1340633-f74-1024x681.jpeg",
           "likes": [
-            2
+            2,
+            1
           ],
           "comments": [],
           "author": {
@@ -580,7 +579,8 @@
           "id": 12,
           "imgUrl": "https://huntland.ru/wp-content/uploads/2019/01/kavkazskiy_lesnoy_kot_10-1024x682.jpg",
           "likes": [
-            2
+            2,
+            1
           ],
           "comments": [],
           "author": {

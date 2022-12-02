@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { memoUser, memoUserPosts } from '../../store/selector';
 import {
@@ -17,6 +17,16 @@ function UserPage() {
   const { posts, isPostsLoading } = useSelector(memoUserPosts);
   const { id } = useParams();
   const dispatch = useDispatch();
+  const [postsForRender, setPostsForRender] = useState([]);
+
+  useEffect(() => {
+    dispatch(fetchUserPosts(id));
+  }, []);
+
+  useEffect(() => {
+    if (posts.length) setPostsForRender([...posts].splice(0, 12));
+  }, [posts]);
+
   const onClickLike = (PostId) => {
     dispatch(
       likeUserPost({
@@ -26,10 +36,6 @@ function UserPage() {
       })
     );
   };
-
-  useEffect(() => {
-    dispatch(fetchUserPosts(id));
-  }, []);
 
   return (
     <Layout>
@@ -45,7 +51,7 @@ function UserPage() {
           url={authorizedUser[0].url}
         />
         <div className='cnUserPageRootContant'>
-          {posts.map(({ comments, likes, imgUrl, id }) => (
+          {postsForRender.map(({ comments, likes, imgUrl, id }) => (
             <Card
               key={v4()}
               id={id}
