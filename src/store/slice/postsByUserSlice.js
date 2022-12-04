@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const initialState = {
   posts: [],
-  isPostsLoading: false,
+  isPostsLoading: true,
   postError: null,
 };
 
@@ -10,7 +10,7 @@ export const fetchUserPosts = createAsyncThunk(
   'userPosts/fetchUserPosts',
   async function (userId, { rejectWithValue }) {
     const response = await fetch(
-      `http://localhost:3001/postsByUser?${userId && `id=${userId}`}`
+      `http://localhost:3001/postsByUser?id=${userId}`
     );
 
     if (!response.ok) {
@@ -79,6 +79,7 @@ const postsByUserSlice = createSlice({
       })
       .addCase(fetchUserPosts.fulfilled, (state, action) => {
         state.isPostsLoading = false;
+
         state.posts = action.payload;
       })
       .addCase(likeUserPost.fulfilled, (state, action) => {
@@ -90,13 +91,13 @@ const postsByUserSlice = createSlice({
         //   idPost.likes = action.payload.likes;
         // }
         state.posts = action.payload.posts;
-
         // console.log(idPost);
         // console.log(action.payload.posts[0]);
       })
       .addMatcher(ispostError, (state, action) => {
         state.postError = Number(action.payload);
         state.isPostsLoading = false;
+        state.posts = [];
       });
   },
 });

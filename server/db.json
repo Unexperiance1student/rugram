@@ -1,6 +1,44 @@
 {
   "posts": [
     {
+      "id": 1,
+      "imgUrl": "https://img3.goodfon.ru/original/7297x4870/2/5a/pasture-the-bavarian-alps.jpg",
+      "likes": [],
+      "comments": [
+        {
+          "nickname": "dedxx",
+          "text": "dsf"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "AYE"
+        }
+      ],
+      "author": {
+        "id": 3,
+        "nickname": "Seriy2",
+        "avatarUrl": "https://rest-zone.ru/upload/photos/2021/05/8Uu8sYR5dIQwPOSdPbvK_12_ffa126fc14b13cbf301d86cff093984a_avatar_full.jpg"
+      }
+    },
+    {
+      "id": 2,
+      "imgUrl": "https://s1.1zoom.ru/big0/93/340564-FAKIR.jpg",
+      "likes": [
+        1
+      ],
+      "comments": [
+        {
+          "nickname": "dedxx",
+          "text": "asd"
+        }
+      ],
+      "author": {
+        "id": 4,
+        "nickname": "Dmytro3",
+        "avatarUrl": "https://ru-static.z-dn.net/files/d73/12f74c43f454f38c2e0c6dbe581f73ef.jpg"
+      }
+    },
+    {
       "id": 3,
       "imgUrl": "https://img.desktopwallpapers.ru/auto/pics/wide/1920x1200/f8e101812b260e55d1d9b7aa64af8171.jpg",
       "likes": [
@@ -22,22 +60,6 @@
         {
           "nickname": "dedInside",
           "text": "wayke up"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "asd"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "a"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "ads"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "фыв"
         }
       ],
       "author": {
@@ -393,7 +415,8 @@
           "id": 2,
           "imgUrl": "http://mobimg.b-cdn.net/v3/fetch/7a/7a5f817856f2b3e6d3b1b32e7dba9c67.jpeg",
           "likes": [
-            2
+            2,
+            1
           ],
           "comments": [
             {
@@ -419,7 +442,8 @@
           "id": 3,
           "imgUrl": "https://cat4you.ru/wp-content/uploads/1/8/3/18397a04797ed4e4a1dca285a24c2900.jpeg",
           "likes": [
-            2
+            2,
+            1
           ],
           "comments": [
             {
@@ -539,7 +563,8 @@
           "id": 9,
           "imgUrl": "https://cat4you.ru/wp-content/uploads/1/8/3/18397a04797ed4e4a1dca285a24c2900.jpeg",
           "likes": [
-            2
+            2,
+            1
           ],
           "comments": [],
           "author": {
@@ -565,8 +590,7 @@
           "id": 11,
           "imgUrl": "https://mnogo-krolikov.ru/wp-content/uploads/2019/06/https-avatars-mds-yandex-net-get-pdb-1340633-f74-1024x681.jpeg",
           "likes": [
-            2,
-            1
+            2
           ],
           "comments": [],
           "author": {
@@ -579,7 +603,33 @@
           "id": 12,
           "imgUrl": "https://huntland.ru/wp-content/uploads/2019/01/kavkazskiy_lesnoy_kot_10-1024x682.jpg",
           "likes": [
+            2
+          ],
+          "comments": [],
+          "author": {
+            "id": 1,
+            "nickname": "ded",
+            "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
+          }
+        },
+        {
+          "id": 13,
+          "imgUrl": "https://huntland.ru/wp-content/uploads/2019/01/kavkazskiy_lesnoy_kot_10-1024x682.jpg",
+          "likes": [],
+          "comments": [],
+          "author": {
+            "id": 1,
+            "nickname": "ded",
+            "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
+          }
+        },
+        {
+          "id": 14,
+          "imgUrl": "https://mnogo-krolikov.ru/wp-content/uploads/2019/06/https-avatars-mds-yandex-net-get-pdb-1340633-f74-1024x681.jpeg",
+          "likes": [
             2,
+            3,
+            5,
             1
           ],
           "comments": [],
@@ -590,6 +640,52 @@
           }
         }
       ]
+    },
+    {
+      "id": 2,
+      "posts": []
+    },
+    {
+      "id": 3,
+      "posts": [
+        {
+          "id": 1,
+          "imgUrl": "https://mobimg.b-cdn.net/v3/fetch/fc/fc97db329bd4482025eaa1e3961dc80e.jpeg?w=1470&r=0.5625",
+          "likes": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "comments": [
+            {
+              "nickname": "IUvan222",
+              "text": "awesome!"
+            },
+            {
+              "nickname": "IUvan222",
+              "text": "cool!"
+            },
+            {
+              "nickname": "Seriy2",
+              "text": "yes!"
+            }
+          ],
+          "author": {
+            "id": 1,
+            "nickname": "ded",
+            "avatarUrl": "https://ru-static.z-dn.net/files/d38/45833edf494ba8dc483de2773abc1bf3.png"
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "posts": []
+    },
+    {
+      "id": 5,
+      "posts": []
     }
   ]
 }

@@ -7,10 +7,15 @@ import { fetchAuthorizedUser } from '../../../store/slice/userSlice';
 import UserPage from '../../UserPage/UserPage';
 import Loader from '../../../UI/Loader/Loader';
 import { v4 } from 'uuid';
+import { memoUser } from '../../../store/selector';
+import {
+  fetchPosts,
+  fetchPostsTotalCount,
+} from '../../../store/slice/postsSlice';
 
 const authorizedRoutes = [
   { key: v4(), path: '/', element: <MainPage />, exact: true },
-  { key: 2, path: '/:id', element: <UserPage />, exact: true },
+  { key: v4(), path: '/:id', element: <UserPage />, exact: true },
 ];
 const NonAuthorizedRoutes = (
   <Route
@@ -22,13 +27,15 @@ const NonAuthorizedRoutes = (
 
 export default function MyRoutes() {
   const dispatch = useDispatch();
-  const { authorizedUser, isUserLoading } = useSelector((state) => state.user);
 
+  const { authorizedUser, isAuthorizedUserLoading } = useSelector(memoUser);
   useEffect(() => {
     dispatch(fetchAuthorizedUser());
+    dispatch(fetchPostsTotalCount());
+    dispatch(fetchPosts());
   }, []);
 
-  if (isUserLoading) return <Loader />;
+  if (isAuthorizedUserLoading) return <Loader />;
   return (
     <BrowserRouter>
       <Routes>

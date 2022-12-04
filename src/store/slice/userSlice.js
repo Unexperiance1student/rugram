@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async function (id, { rejectWithValue }) {
-    const response = await fetch(`http://localhost:3001/users?_id=${id}`);
+    const response = await fetch(`http://localhost:3001/users?id=${id}`);
 
     if (!response.ok) {
       return rejectWithValue('Server Error!');
@@ -28,7 +28,8 @@ export const fetchAuthorizedUser = createAsyncThunk(
 
 const initialState = {
   user: {},
-  isUserLoading: false,
+  isUserLoading: true,
+  isAuthorizedUserLoading: true,
   userError: null,
   authorizedUser: undefined,
 };
@@ -49,11 +50,11 @@ const userSlice = createSlice({
       })
 
       .addCase(fetchAuthorizedUser.pending, (state) => {
-        state.isUserLoading = true;
+        state.isAuthorizedUserLoading = true;
         state.userError = null;
       })
       .addCase(fetchAuthorizedUser.fulfilled, (state, action) => {
-        state.isUserLoading = false;
+        state.isAuthorizedUserLoading = false;
         if (action.payload.length === 0) {
           state.authorizedUser = undefined;
         } else {

@@ -1,0 +1,11 @@
+.cnButton {
+  padding: 5px;
+  background: #2196f3;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background: #2195f39a;
+  }
+}

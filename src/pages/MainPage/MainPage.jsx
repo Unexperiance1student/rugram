@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts, fetchPostsTotalCount } from '../../store/slice/postsSlice';
+import { fetchPosts } from '../../store/slice/postsSlice';
 import Layout from '../components/Layout/Layout';
 import Loader from '../../UI/Loader/Loader';
 import './style.scss';
@@ -12,15 +12,12 @@ export default function MainPage() {
   const dispatch = useDispatch();
   const [page, setPage] = useState(2);
   const { totalCount, posts, postError } = useSelector(memoPost);
-
-  useEffect(() => {
-    dispatch(fetchPostsTotalCount());
-    dispatch(fetchPosts());
-  }, []);
+  // useEffect(() => {}, []);
 
   const nextHandler = () => {
     setPage((prev) => prev + 1);
     dispatch(fetchPosts(page));
+    console.log(page);
   };
 
   if (postError) return <h1>errors</h1>;

@@ -3,6 +3,7 @@ import './style.scss';
 import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
 import { v4 } from 'uuid';
+import Button from '../../../UI/Button/Button';
 
 function DetaliedCard({
   id,
@@ -90,11 +91,16 @@ function DetaliedCard({
           placeholder='Оставьте комментарий'
           className='cnDetailedCardTextarea'
         />
-        <button
+        <Button
           onClick={textChange}
           className='cnDetailedCardButton'>
           Отправить
-        </button>
+        </Button>
+
+        {/* <button
+          >
+         
+        </button> */}
       </div>
     </div>
   );

@@ -12,3 +12,14 @@
   padding-left: 10px;
   width: 930px;
 }
+
+.cnUserPageScroll {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.cnUserPageNoPosts {
+  margin: auto;
+  font-weight: 600;
+  font-size: 20px;
+}
