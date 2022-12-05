@@ -3,7 +3,9 @@
     {
       "id": 1,
       "imgUrl": "https://img3.goodfon.ru/original/7297x4870/2/5a/pasture-the-bavarian-alps.jpg",
-      "likes": [],
+      "likes": [
+        1
+      ],
       "comments": [
         {
           "nickname": "dedxx",
@@ -23,39 +25,32 @@
         },
         {
           "nickname": "dedxx",
-          "text": "a"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "q"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "a"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "a"
-        },
-        {
-          "nickname": "dedxx",
           "text": "wq"
         },
+       
         {
           "nickname": "dedxx",
-          "text": "ф"
+          "text": "йуц"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "йуцq"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "ыф"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "ц"
+        },
+        {
+          "nickname": "dedxx",
+          "text": "a"
         },
         {
           "nickname": "dedxx",
           "text": "й"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "в"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "d"
         }
       ],
       "author": {
@@ -101,33 +96,10 @@
           "nickname": "dedxx",
           "text": "asdasaasdasda"
         },
+       
         {
           "nickname": "dedxx",
-          "text": "asd"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "asd"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "ячяф"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "йц"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "ыфв"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "фы"
-        },
-        {
-          "nickname": "dedxx",
-          "text": "в"
+          "text": "ауе"
         }
       ],
       "author": {
@@ -500,7 +472,8 @@
             2,
             3,
             4,
-            5
+            5,
+            1
           ],
           "comments": [
             {

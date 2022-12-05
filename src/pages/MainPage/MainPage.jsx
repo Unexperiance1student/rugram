@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchPosts } from '../../store/slice/postsSlice';
@@ -10,14 +10,14 @@ import { memoPost } from '../../store/selector';
 
 export default function MainPage() {
   const dispatch = useDispatch();
+
   const [page, setPage] = useState(2);
   const { totalCount, posts, postError } = useSelector(memoPost);
-  // useEffect(() => {}, []);
-
+  // const [count, setCount] = useState(4);
   const nextHandler = () => {
     setPage((prev) => prev + 1);
     dispatch(fetchPosts(page));
-    console.log(page);
+    // setCount((prev) => prev + 4);
   };
 
   if (postError) return <h1>errors</h1>;

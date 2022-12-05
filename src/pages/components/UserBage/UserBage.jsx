@@ -27,4 +27,4 @@ function UserBage({ nickName, avatarUrl, id }) {
   );
 }
 
-export default UserBage;
+export default React.memo(UserBage);

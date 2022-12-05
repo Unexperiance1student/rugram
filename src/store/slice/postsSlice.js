@@ -30,7 +30,7 @@ export const fetchPosts = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   'posts/likePost',
-  async function ({ userId, postId }, { rejectWithValue, getState, dispatch }) {
+  async function ({ userId, postId }, { rejectWithValue, getState }) {
     const post = getState().posts.posts.find((post) => post.id === postId);
     if (post) {
       const newPost = { ...post, likes: [...post.likes] };

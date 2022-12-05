@@ -8,7 +8,6 @@ import {
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
 import UserBio from '../components/UserBio/UserBio';
-import { v4 } from 'uuid';
 import './style.scss';
 import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -52,13 +51,13 @@ function UserPage() {
   };
 
   // const nextHandler = () => {
-    // const newPosts = [...posts];
-    // const offSet = 12 * (page + 1);
-    // setPostsForRender([
-    //   ...postsForRender,
-    //   ...newPosts.splice(offSet, offSet + 12),
-    // ]);
-    // setPage(page + 1);
+  // const newPosts = [...posts];
+  // const offSet = 12 * (page + 1);
+  // setPostsForRender([
+  //   ...postsForRender,
+  //   ...newPosts.splice(offSet, offSet + 12),
+  // ]);
+  // setPage(page + 1);
   // };
 
   if (isUserLoading || isPostsLoading) return <Loader />;
@@ -87,7 +86,7 @@ function UserPage() {
             //   loader={<Loader className={'cnMainPageLoader'} />}>
             postsForRender.map(({ comments, likes, imgUrl, id }) => (
               <Card
-                key={v4()}
+                key={id}
                 id={id}
                 imgUrl={imgUrl}
                 likes={likes.length}

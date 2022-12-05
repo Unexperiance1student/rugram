@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { v4 } from 'uuid';
 import Button from '../../../UI/Button/Button';
 import UserCounter from '../UserCounter/UserCounter';
 import './style.scss';
@@ -17,9 +16,9 @@ function UserBio({
   isSubs,
 }) {
   const userText = [
-    { key: v4(), count: 4, text: 'Публикаций' },
-    { key: v4(), count: subscribers, text: 'Подписчиков' },
-    { key: v4(), count: subscribed, text: 'Подписок' },
+    { key: 1, count: 4, text: 'Публикаций' },
+    { key: 2, count: subscribers, text: 'Подписчиков' },
+    { key: 3, count: subscribed, text: 'Подписок' },
   ];
 
   const [btnProps, setBtnProps] = useState({

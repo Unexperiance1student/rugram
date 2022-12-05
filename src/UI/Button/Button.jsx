@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-export default function Button(props) {
+function Button(props) {
   return (
     <button
       {...props}
@@ -9,3 +9,5 @@ export default function Button(props) {
     />
   );
 }
+
+export default React.memo(Button);

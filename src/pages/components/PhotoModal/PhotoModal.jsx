@@ -5,7 +5,6 @@ import Button from '../../../UI/Button/Button';
 import TextArea from '../../../UI/TextArea/TextArea';
 import Comment from '../Comment/Comments';
 import UserBage from '../UserBage/UserBage';
-import { v4 } from 'uuid';
 
 import './style.scss';
 
@@ -30,7 +29,6 @@ function PhotoModal({
   let textRef = useRef('');
 
   const sendComments = () => {
-    // onClose.stopPropagation();
     onCommentSubmit(textRef);
   };
   return (
@@ -60,7 +58,7 @@ function PhotoModal({
             <div className='cnModalComments'>
               {comments.map((comment) => (
                 <Comment
-                  key={v4()}
+                  key={comment.id}
                   {...comment}
                 />
               ))}

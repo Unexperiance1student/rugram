@@ -2,10 +2,11 @@ import React, { useRef, useState } from 'react';
 import './style.scss';
 import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
-import { v4 } from 'uuid';
 import Button from '../../../UI/Button/Button';
 import PhotoModal from '../PhotoModal/PhotoModal';
 import TextArea from '../../../UI/TextArea/TextArea';
+import { useDispatch } from 'react-redux';
+import { likePost, sendComment } from '../../../store/slice/postsSlice';
 
 function DetaliedCard({
   id,
@@ -17,12 +18,20 @@ function DetaliedCard({
   isLikedByYou,
   comments,
   authorizedUser,
-  onClickLike,
-  onClickSend,
 }) {
+  const dispatch = useDispatch();
+
   const [isCommentShow, setIsCommentShow] = useState(false);
   let textRef = useRef('');
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const onClickLike = (authorizedUser, id) => {
+    dispatch(likePost({ userId: authorizedUser, postId: id }));
+  };
+
+  const onClickSend = (authorizedUser, comment, id) => {
+    dispatch(sendComment({ user: authorizedUser, text: comment, postId: id }));
+  };
 
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
@@ -30,7 +39,7 @@ function DetaliedCard({
       const commentsForRender = commentsCopy.slice(-2);
       return commentsForRender.map((comment) => (
         <Comment
-          key={v4()}
+          key={comment.id}
           userName={comment.nickname}
           text={comment.text}
         />
@@ -38,7 +47,7 @@ function DetaliedCard({
     }
     return comments.map((comment) => (
       <Comment
-        key={v4()}
+        key={comment.id}
         userName={comment.nickname}
         text={comment.text}
       />

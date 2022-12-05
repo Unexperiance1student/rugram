@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss';
 
-export default function TextArea({ textRef, placeholder }) {
+function TextArea({ textRef, placeholder }) {
   return (
     <textarea
       ref={textRef}
@@ -10,3 +10,5 @@ export default function TextArea({ textRef, placeholder }) {
     />
   );
 }
+
+export default React.memo(TextArea);
