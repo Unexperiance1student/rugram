@@ -4,6 +4,8 @@ import UserBadge from '../UserBage/UserBage';
 import Comment from '../Comment/Comments';
 import { v4 } from 'uuid';
 import Button from '../../../UI/Button/Button';
+import PhotoModal from '../PhotoModal/PhotoModal';
+import TextArea from '../../../UI/TextArea/TextArea';
 
 function DetaliedCard({
   id,
@@ -20,6 +22,7 @@ function DetaliedCard({
 }) {
   const [isCommentShow, setIsCommentShow] = useState(false);
   let textRef = useRef('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
@@ -42,7 +45,7 @@ function DetaliedCard({
     ));
   };
 
-  const textChange = () => {
+  const textChange = (textRef) => {
     if (textRef.current.value) {
       onClickSend(authorizedUser.nickname, textRef.current.value, id);
       textRef.current.focus();
@@ -70,7 +73,10 @@ function DetaliedCard({
           onClick={() => onClickLike(authorizedUser.id, id)}
           className={`${isLikedByYou ? 'fa-solid' : 'fa-regular'} fa-heart`}
         />
-        <i className='fa-solid fa-comment' />
+        <i
+          className='fa-solid fa-comment'
+          onClick={() => setIsModalVisible(true)}
+        />
       </div>
       <div className='cnDetailedCardLikes'>{`Оценили ${likes} человек`}</div>
       <div className='cnDetailedCardComments'>
@@ -86,22 +92,27 @@ function DetaliedCard({
         {renderComments()}
       </div>
       <div className='cnDetailedCardTextareaWrapper'>
-        <textarea
-          ref={textRef}
+        <TextArea
+          textRef={textRef}
           placeholder='Оставьте комментарий'
-          className='cnDetailedCardTextarea'
         />
         <Button
-          onClick={textChange}
+          onClick={() => textChange(textRef)}
           className='cnDetailedCardButton'>
           Отправить
         </Button>
-
-        {/* <button
-          >
-         
-        </button> */}
       </div>
+      <PhotoModal
+        imgUrl={imgUrl}
+        userName={userNameAuthor}
+        avatarUrl={avatarUrl}
+        userId={authorId}
+        isOpen={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        comments={comments}
+        onCommentSubmit={textChange}
+        textRef={textRef}
+      />
     </div>
   );
 }

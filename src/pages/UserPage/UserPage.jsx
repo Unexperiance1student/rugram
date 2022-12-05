@@ -51,7 +51,7 @@ function UserPage() {
     );
   };
 
-  const nextHandler = () => {
+  // const nextHandler = () => {
     // const newPosts = [...posts];
     // const offSet = 12 * (page + 1);
     // setPostsForRender([
@@ -59,8 +59,7 @@ function UserPage() {
     //   ...newPosts.splice(offSet, offSet + 12),
     // ]);
     // setPage(page + 1);
-  };
-  // console.log(posts.length);
+  // };
 
   if (isUserLoading || isPostsLoading) return <Loader />;
   return (
