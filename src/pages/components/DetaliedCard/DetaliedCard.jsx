@@ -7,6 +7,7 @@ import PhotoModal from '../PhotoModal/PhotoModal';
 import TextArea from '../../../UI/TextArea/TextArea';
 import { useDispatch } from 'react-redux';
 import { likePost, sendComment } from '../../../store/slice/postsSlice';
+import ImgWithLoader from '../../../UI/ImgWithLoader/ImgWithLoader';
 
 function DetaliedCard({
   id,
@@ -33,6 +34,14 @@ function DetaliedCard({
     dispatch(sendComment({ user: authorizedUser, text: comment, postId: id }));
   };
 
+  const textChange = (textRef) => {
+    if (textRef.current.value) {
+      onClickSend(authorizedUser.nickname, textRef.current.value, id);
+      textRef.current.focus();
+      textRef.current.value = '';
+    }
+  };
+
   const renderComments = () => {
     if (comments.length > 2 && !isCommentShow) {
       const commentsCopy = [...comments];
@@ -54,13 +63,6 @@ function DetaliedCard({
     ));
   };
 
-  const textChange = (textRef) => {
-    if (textRef.current.value) {
-      onClickSend(authorizedUser.nickname, textRef.current.value, id);
-      textRef.current.focus();
-    }
-  };
-
   return (
     <div className='cnDetailedCardRoot'>
       <div className='cnDetailedCardHeader'>
@@ -70,12 +72,21 @@ function DetaliedCard({
           id={authorId}
         />
       </div>
-      <div>
-        <img
-          className='cnDetailedCardImg'
+      <div className='cnDetailedCardImgWrapper'>
+        <ImgWithLoader
           src={imgUrl}
           alt='img'
+          className='cnDetailedCardImg'
         />
+
+        {/* <img
+          className={`${
+            isImageLoaded && 'cnDetailedCardImgLoaded'
+          } cnDetailedCardImg`}
+          src={imgUrl}
+          alt='img'
+          onLoad={() => setIsImageLoaded(true)}
+        /> */}
       </div>
       <div className='cnDetailedCardButtons'>
         <i
@@ -121,6 +132,8 @@ function DetaliedCard({
         comments={comments}
         onCommentSubmit={textChange}
         textRef={textRef}
+        isLikedByYou={isLikedByYou}
+        onLikeClick={() => onClickLike(authorizedUser.id, id)}
       />
     </div>
   );

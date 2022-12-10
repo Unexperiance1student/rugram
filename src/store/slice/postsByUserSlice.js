@@ -1,9 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const initialState = {
   posts: [],
   isPostsLoading: true,
-  postError: null,
+  postUserError: null,
 };
 
 export const fetchUserPosts = createAsyncThunk(
@@ -67,6 +68,51 @@ export const likeUserPost = createAsyncThunk(
   }
 );
 
+export const sendCommentUserPost = createAsyncThunk(
+  'userPosts/sendCommentUserPost',
+  async function (
+    { user, text, postId, postAuthorId },
+    { rejectWithValue, getState }
+  ) {
+    const posts = getState().userPosts.posts;
+    const newPosts = [...posts];
+    const postIndex = posts.findIndex((post) => post.id === postId);
+    const postForEdit = { ...newPosts[postIndex] };
+    const comment = {
+      nickname: user,
+      text: text,
+    };
+
+    postForEdit.comments = postForEdit.comments.concat(comment);
+
+    newPosts[postIndex] = { ...postForEdit };
+
+    if (postForEdit) {
+      const response = await fetch(
+        `http://localhost:3001/postsByUser/${postAuthorId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            id: postAuthorId,
+            posts: newPosts,
+          }),
+        }
+      );
+      if (!response.ok) {
+        return rejectWithValue('Server Error!');
+      }
+      const data = await response.json();
+
+      return data;
+    }
+
+    return rejectWithValue('No post!');
+  }
+);
+
 const postsByUserSlice = createSlice({
   name: 'userPosts',
   initialState,
@@ -75,11 +121,10 @@ const postsByUserSlice = createSlice({
     builder
       .addCase(fetchUserPosts.pending, (state) => {
         state.isPostsLoading = true;
-        state.postError = null;
+        state.postUserError = null;
       })
       .addCase(fetchUserPosts.fulfilled, (state, action) => {
         state.isPostsLoading = false;
-
         state.posts = action.payload;
       })
       .addCase(likeUserPost.fulfilled, (state, action) => {
@@ -94,10 +139,23 @@ const postsByUserSlice = createSlice({
         // console.log(idPost);
         // console.log(action.payload.posts[0]);
       })
+      .addCase(sendCommentUserPost.fulfilled, (state, action) => {
+        // const idPost = state.posts.findIndex(
+        //   (post) => post.id === action.payload.posts
+        // );
+        // console.log(idPost);
+        // if (idPost) {
+        //   idPost.likes = action.payload.likes;
+        // }
+        state.posts = action.payload.posts;
+        // console.log(idPost);
+        // console.log(action.payload.posts[0]);
+      })
       .addMatcher(ispostError, (state, action) => {
-        state.postError = Number(action.payload);
+        state.postUserError = action.error;
         state.isPostsLoading = false;
         state.posts = [];
+        toast.error(`${action.error.message}`);
       });
   },
 });

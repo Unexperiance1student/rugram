@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
@@ -63,8 +64,9 @@ const userSlice = createSlice({
       })
 
       .addMatcher(isuserError, (state, action) => {
-        state.userError = Number(action.payload);
+        state.userError = action.error;
         state.isUserLoading = false;
+        toast.error(`${action.error.message}`);
       });
   },
 });

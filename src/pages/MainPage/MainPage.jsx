@@ -7,20 +7,17 @@ import Loader from '../../UI/Loader/Loader';
 import './style.scss';
 import PostsList from '../components/PostsList/PostsList';
 import { memoPost } from '../../store/selector';
+import { toast } from 'react-toastify';
 
 export default function MainPage() {
   const dispatch = useDispatch();
-
   const [page, setPage] = useState(2);
-  const { totalCount, posts, postError } = useSelector(memoPost);
-  // const [count, setCount] = useState(4);
+  const { totalCount, posts } = useSelector(memoPost);
   const nextHandler = () => {
     setPage((prev) => prev + 1);
     dispatch(fetchPosts(page));
-    // setCount((prev) => prev + 4);
   };
 
-  if (postError) return <h1>errors</h1>;
   return (
     <Layout>
       <div className='cnMainPageRoot'>
@@ -29,7 +26,7 @@ export default function MainPage() {
           next={nextHandler}
           hasMore={posts.length < totalCount}
           loader={<Loader className={'cnMainPageLoader'} />}
-          endMessage={<p>Thats all</p>}>
+          endMessage={''}>
           <PostsList />
         </InfiniteScroll>
       </div>

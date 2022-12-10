@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 export const fetchPostsTotalCount = createAsyncThunk(
   'posts/fetchPostsTotalCount',
@@ -49,6 +50,7 @@ export const likePost = createAsyncThunk(
       });
 
       if (!response.ok) {
+        toast.error(`${response.error}`);
         return rejectWithValue('Server Error!');
       }
       const data = await response.json();
@@ -141,8 +143,9 @@ const postsSlice = createSlice({
         }
       })
       .addMatcher(ispostError, (state, action) => {
-        state.postError = Number(action.payload);
+        state.postError = action.error.name;
         state.isPostsLoading = false;
+        toast.error(`${action.error.message}`);
       });
   },
 });

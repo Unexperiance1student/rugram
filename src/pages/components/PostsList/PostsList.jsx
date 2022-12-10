@@ -4,9 +4,8 @@ import { memoPost, memoUser } from '../../../store/selector';
 import DetaliedCard from '../DetaliedCard/DetaliedCard';
 
 export default function PostsList() {
-  const { posts } = useSelector(memoPost);
+  const { posts, isPostsLoading } = useSelector(memoPost);
   const { authorizedUser } = useSelector(memoUser);
-
   return (
     <>
       {posts.map(({ author, likes, imgUrl, comments, id }) => (

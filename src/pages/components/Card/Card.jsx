@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PhotoModal from '../PhotoModal/PhotoModal';
 import './style.scss';
 
 export default function Card({
@@ -8,7 +9,11 @@ export default function Card({
   isLikedByYou,
   onClickLike,
   id,
+  userData,
+  onClickSend,
 }) {
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
   return (
     <div className='cnCardRoot'>
       <img
@@ -25,9 +30,23 @@ export default function Card({
           onClick={() => onClickLike(id)}
         />
         <span className='cnCardNumber cnCardLikes'>{likes}</span>
-        <i className='fas fa-comment cnCardIcon' />
-        <span className='cnCardNumber'>{comments}</span>
+        <i
+          className='fas fa-comment cnCardIcon'
+          onClick={() => setIsModalVisible(true)}
+        />
+        <span className='cnCardNumber'>{comments.length}</span>
       </div>
+      <PhotoModal
+        imgUrl={imgUrl}
+        {...userData}
+        isOpen={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        comments={comments}
+        id={id}
+        onCommentSubmit={onClickSend}
+        isLikedByYou={isLikedByYou}
+        onLikeClick={() => onClickLike(id)}
+      />
     </div>
   );
 }

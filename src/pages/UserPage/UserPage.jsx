@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { memoUser, memoUserPosts } from '../../store/selector';
 import {
   fetchUserPosts,
   likeUserPost,
+  sendCommentUserPost,
 } from '../../store/slice/postsByUserSlice';
 import Card from '../components/Card/Card';
 import Layout from '../components/Layout/Layout';
@@ -13,11 +14,12 @@ import { useParams } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Loader from '../../UI/Loader/Loader';
 import { fetchUser } from '../../store/slice/userSlice';
+import { toast } from 'react-toastify';
 
 function UserPage() {
   const { id } = useParams();
   const { user, isUserLoading, authorizedUser } = useSelector(memoUser);
-  const { posts, isPostsLoading } = useSelector(memoUserPosts);
+  const { posts, isPostsLoading, postUserError } = useSelector(memoUserPosts);
   const dispatch = useDispatch();
   const [postsForRender, setPostsForRender] = useState([]);
   // const [page, setPage] = useState(0);
@@ -50,6 +52,25 @@ function UserPage() {
     );
   };
 
+  const onClickSend = (comment, PostId) => {
+    dispatch(
+      sendCommentUserPost({
+        user: authorizedUser[0].nickname,
+        text: comment,
+        postId: PostId,
+        postAuthorId: Number(id),
+      })
+    );
+  };
+
+  const textChange = (textRef, PostId) => {
+    if (textRef.current.value) {
+      onClickSend(textRef.current.value, PostId);
+      textRef.current.focus();
+      textRef.current.value = '';
+    }
+  };
+
   // const nextHandler = () => {
   // const newPosts = [...posts];
   // const offSet = 12 * (page + 1);
@@ -59,8 +80,16 @@ function UserPage() {
   // ]);
   // setPage(page + 1);
   // };
-
+  if (postUserError)
+    return (
+      <Layout>
+        <div className='cnMainPageRoot'>
+          {toast.error('Something went wrong')}
+        </div>
+      </Layout>
+    );
   if (isUserLoading || isPostsLoading) return <Loader />;
+
   return (
     <Layout>
       <div className='cnUserPageRoot'>
@@ -90,9 +119,15 @@ function UserPage() {
                 id={id}
                 imgUrl={imgUrl}
                 likes={likes.length}
-                comments={comments.length}
+                comments={comments}
                 isLikedByYou={likes.includes(authorizedUser[0].id)}
                 onClickLike={onClickLike}
+                userData={{
+                  userName: user[0].nickname,
+                  avatarUrl: user[0].avatarUrl,
+                  userId: user[0].id,
+                }}
+                onClickSend={textChange}
               />
             ))
           ) : (

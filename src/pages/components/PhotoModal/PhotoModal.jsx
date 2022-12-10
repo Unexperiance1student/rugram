@@ -17,6 +17,9 @@ function PhotoModal({
   userId,
   comments,
   onCommentSubmit,
+  isLikedByYou,
+  onLikeClick,
+  id,
 }) {
   useEffect(() => {
     const body = document.querySelector('body');
@@ -29,7 +32,7 @@ function PhotoModal({
   let textRef = useRef('');
 
   const sendComments = () => {
-    onCommentSubmit(textRef);
+    onCommentSubmit(textRef, id);
   };
   return (
     <Modal
@@ -59,15 +62,20 @@ function PhotoModal({
               {comments.map((comment) => (
                 <Comment
                   key={comment.id}
-                  {...comment}
+                  userName={comment.nickname}
+                  text={comment.text}
                 />
               ))}
             </div>
           </div>
           <div>
             <div className='cnModalIcons'>
-              <i className='fa fa-heart' />
-              <i />
+              <i
+                onClick={onLikeClick}
+                className={`${
+                  isLikedByYou ? 'fa-solid' : 'fa-regular'
+                } fa-heart`}
+              />
             </div>
             <div className='cnDetailedCardTextareaWrapper'>
               <TextArea
