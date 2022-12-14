@@ -98,11 +98,6 @@ function UserBio({
 
     alert('succes');
     setIsEditMode(false);
-    setFormUserName('');
-    setFormFirstName('');
-    setFormLastName('');
-    setFormDescription('');
-    setFormUrl('');
     setUserNameError('');
     setFirstNameError('');
     setLastNameError('');
