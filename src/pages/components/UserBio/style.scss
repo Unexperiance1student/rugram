@@ -28,6 +28,16 @@
   margin-bottom: 5px;
 }
 
+.cnUserBioButtonRow {
+  display: flex;
+  align-items: flex-start;
+}
+
+.cnUserEditButton {
+  margin-top: 4px;
+  margin-left: 10px;
+}
+
 .cnUserBioFio {
   font-weight: 600;
 }
