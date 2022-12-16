@@ -18,6 +18,7 @@ function UserBio({
   url,
   isMyPage,
   isSubs,
+  onEdit,
 }) {
   const userText = [
     { key: 1, count: 4, text: 'Публикаций' },
@@ -29,6 +30,7 @@ function UserBio({
     onClick: () => false,
     children: 'Подписаться',
   });
+
   const [isEditMode, setIsEditMode] = useState(false);
   const [formUserName, setFormUserName] = useState(nickname);
   const [formFirstName, setFormFirstName] = useState(firstName);
@@ -96,7 +98,15 @@ function UserBio({
       return;
     }
 
-    alert('succes');
+    onEdit({
+      firstName: formFirstName,
+      lastName: formLastName,
+      nickname: formUserName,
+      description: formDescription,
+      url: formUrl,
+    });
+
+    // alert('succes');
     setIsEditMode(false);
     setUserNameError('');
     setFirstNameError('');

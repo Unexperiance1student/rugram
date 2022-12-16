@@ -7,7 +7,6 @@ import Loader from '../../UI/Loader/Loader';
 import './style.scss';
 import PostsList from '../components/PostsList/PostsList';
 import { memoPost } from '../../store/selector';
-import { toast } from 'react-toastify';
 
 export default function MainPage() {
   const dispatch = useDispatch();

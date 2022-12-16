@@ -27,6 +27,36 @@ export const fetchAuthorizedUser = createAsyncThunk(
   }
 );
 
+export const userEdit = createAsyncThunk(
+  'user/userEdit',
+  async function ({ data, userId }, { rejectWithValue, getState }) {
+    const user = getState().user.user;
+    if (user) {
+      const response = await fetch(`http://localhost:3001/users/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          nickname: data.nickname,
+          description: data.description,
+          url: data.url,
+        }),
+      });
+
+      if (!response.ok) {
+        return rejectWithValue('Server Error!');
+      }
+      const res = await response.json();
+      console.log(res);
+      return res;
+    }
+    return rejectWithValue('Error!');
+  }
+);
+
 const initialState = {
   user: {},
   isUserLoading: true,
@@ -50,6 +80,9 @@ const userSlice = createSlice({
         state.user = action.payload;
       })
 
+      .addCase(userEdit.fulfilled, (state, action) => {
+        state.user = [action.payload];
+      })
       .addCase(fetchAuthorizedUser.pending, (state) => {
         state.isAuthorizedUserLoading = true;
         state.userError = null;
